@@ -3,28 +3,41 @@
     <div class="box box-primary">
       <div class="box-body">
         <div class="form-group">
-          <label>Level</label>
+          <label>Username</label>
           <select class="form-control selectize" style="width: 100%;"></select>
         </div>
         <form>
-          <label>Nama Level</label>
+          <label>Username</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-address-card"></i>
+            </div>
+            <input type="text" name="nama" id="nama" class="form-control" required="required" title="Username" placeholder="Username">
+          </div>
+          <br>
+          <label>Password</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </div>
+            <input type="password" name="pwd" id="pwd" class="form-control" title="Password" placeholder="Password">
+          </div>
+          <p style="color: gray; font-size: 14px;">Password tidak berubah</i></p>
+          <br>
+          <label>Level Akun</label>
           <div class="input-group">
             <div class="input-group-addon">
               <i class="fa fa-sitemap"></i>
             </div>
-            <input type="text" name="nama" id="nama" class="form-control" required="required" title="Nama Level" placeholder="Nama Level">
-          </div>
-          <br>
-          <label>Persentasi Jual Dari Harga Beli Barang</label>
-          <div class="input-group">
-            <div class="input-group-addon">
-              <i class="fa fa-percent"></i>
-            </div>
-            <input type="number" name="percent" id="percent" class="form-control" required="required" title="Nama Level" placeholder="Persentasi Jual Barang">
+            <select name="level" id="level" class="form-control">
+              <?php foreach ($level as $level) { ?>
+              <option value="<?=$level->uid?>"><?=$level->nama?></option>
+              <?php } ?>
+            </select>
           </div>
           <br>
           <center>
-            <a type="button" id="save" class="btn btn-primary">Simpan</a>
+            <a type="button" id="save" class="btn btn-primary">Tambah</a>
             <a href="javascript:history.back()" type="button" class="btn btn-danger">Batal</a>
           </center>
         </form>
@@ -115,9 +128,8 @@
       "platfrom":"web",
       "uid":t
     });
-    ajaxCallJson(base_url('api/v1/level'),json,function(data) {
+    ajaxCallJson(base_url('api/v1/user'),json,function(data) {
       json = JSON.parse(data);
-
       if(json.code==200){
         var data = json.data;
         $('#nama').val(data.nama);
@@ -132,10 +144,10 @@
   function config_server_selectize(){
     var config = {
       'create':false,
-      'placeholder':"Kode Level Grup",
+      'placeholder':"Username",
       'sortField':'text',
       load:function(query, callback) {
-        var url = base_url("admin/distributorgroup/list_selectize");
+        var url = base_url("admin/user/list_selectize");
         var data = {'key':query};
         ajaxCallSelectize(url, data, callback);
       }

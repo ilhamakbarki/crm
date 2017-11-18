@@ -23,4 +23,54 @@
 			"data": null
 		}
 
-2. 
+2. Get User By ID
+	- Request (e.g)
+		{
+			"m":"getUser",
+			"platfrom":"web",
+			"uid":"1"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": {
+				"uid": "2",
+				"user": "distributor",
+				"level": "2"
+			}
+		}
+
+3. Delete User
+	- Request (e.g)
+		{
+			"m":"del",
+			"platfrom":"web",
+			"uid":"1"
+		}
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+4. Update User
+	- Request (e.g)
+		{
+			"m":"edit",
+			"platfrom":"web",
+			"uid":"1",
+			"user":"",
+			"pwd":"",
+			"cpwd":"",
+			"changePwd":true,
+			"level":"1"
+		}
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}

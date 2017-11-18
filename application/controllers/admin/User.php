@@ -17,11 +17,13 @@ class User extends CI_Controller {
 
 	public function edit($id=null)
 	{
+		$this->load->model('Table','table');
 		$atr = array(
 			"judul_menu"=>"Edit User ",
 			"desk_menu"=>"Untuk merubah user",
 			'content'=>"admin/user/user-edit",
-			"id"=>$id
+			"id"=>$id,
+			"level"=>$this->table->getAll("user_level")->result()
 			);
 		$this->load->view('admin/template', $atr);
 	}
@@ -51,6 +53,18 @@ class User extends CI_Controller {
 			);
 		$atr['content']="admin/user/user-add";
 		$this->load->view('admin/template', $atr);
+	}
+
+	public function list_selectize()
+	{
+		$this->load->model('Selectize','selectize');
+		$result = $this->selectize->getSelectize(array("user"=>$this->input->post('key', TRUE)),"user")->result();
+		if($result){
+			foreach ($result as $i) {
+				$data[] = array("value"=>$i->uid,"text"=>$i->user);
+			}
+			echo json_encode($data);
+		}
 	}
 
 }

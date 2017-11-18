@@ -57,6 +57,36 @@ class User extends CI_Controller {
 		$this->response(200, "OK");
 	}
 
+	private function getUser($json)
+	{
+		$this->load->model('Table','table');
+		if(!isset($json->uid)){
+			$this->response(204, "ERROR PARAM");
+			return;
+		}
+		$result = $this->table->getSelectedData("uid, user, level", array("uid"=>$json->uid), "user")->row();
+		if(!$result){
+			$this->response(204, "DATA ERORR");
+			return;
+		}
+		$this->response(200, "OK", $result);
+	}
+
+	private function del($json)
+	{
+		$this->load->model('Table','table');
+		if(!isset($json->uid)){
+			$this->response(204, "ERROR PARAM");
+			return;
+		}
+		$result = $this->table->del(array("uid"=>$json->uid), "user");
+		if(!$result['status']){
+			$this->response(204, "ERROR DELETE");
+			return;
+		}
+		$this->response(200, "OK");
+	}
+
 	function datatable()
 	{
 		header("Content-Type: application/json");
