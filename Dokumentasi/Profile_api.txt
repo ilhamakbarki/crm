@@ -1,0 +1,83 @@
+#########################################
+#				Profile					#
+#		CRUD Profile API v1				#
+#		URL API = /api/v1/profile  		#
+#			method = POST				#
+#########################################
+
+
+1. Edit Profile With Level Admin
+
+	-Request (e.g)
+		m = "edit"
+		platfrom = "web"
+		uid = "1"
+		level = "admin"
+		nama = "nama"
+		alamat = "alamat"
+		email = "email"
+		telp = "telp"
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. Edit Profile With Level Distributor
+	-Request (e.g)
+		m = "edit"
+		platfrom = "web"
+		uid = "1"
+		level = "distributor"
+		nama = "nama"
+		alamat = "alamat"
+		email = "email"
+		telp = "telp"
+		pt = "PT"
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+3. Get Profile With Level
+	-Request (e.g)
+		m = "getProfile"
+		platfrom = "web"
+		uid = "1"
+		level = "admin/distributor"
+
+	- Response
+		{
+			"code": 200,
+			"message": "",
+			"data": {
+				"uid": "1",
+				"nama": "Ilham Akbar New",
+				"alamat": "Alamat New",
+				"email": "emailbaru@gmail.com",
+				"telp": "087750002605",
+				"id_u": null
+			}
+		}
+
+4. Change Password
+	-Request (e.g)
+		m = "changePassword"
+		platfrom = "web"
+		uid=""
+		level = ""
+		pwdold = ""
+		pwdnew = ""
+		cpwdnew = ""
+
+	-Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}

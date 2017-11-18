@@ -1,0 +1,83 @@
+#########################################
+#				BARANG					#
+#		CRUD Barang API v1				#
+#		URL API = /api/v1/item  		#
+#		method = application/json		#
+#########################################
+
+
+1. 	Add New Item into List Item
+
+	-Request (e.g)
+		{
+			"m":"add",
+			"platfrom":"web",
+			"kode":"Coba1",
+			"nama":"Hallo1",
+			"satuan":"PCS",
+			"stok":"500",
+			"beli":"10000",
+			"K1":"20000",
+			"K2":"19000",
+			"K-N sebanyak kode dgrup":"18000"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. Edit Item in list
+	-Request (e.g)
+		{
+			"m":"edit",
+			"platfrom":"web",
+			"uid":"uid",
+			"kode":"Coba1",
+			"nama":"Hallo1",
+			"satuan":"PCS",
+			"stok":"500",
+			"beli":"10000",
+			"K1":"20000",
+			"K2":"19000",
+			"K-N sebanyak kode dgrup":"18000"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+3. Delete Item in list
+	-Request (e.g)
+		{
+			"m":"del",
+			"platfrom":"web",
+			"uid":"uid"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+4. Get Detail Item by UID
+	-Request (e.g)
+		{
+			"m":"getItem",
+			"platfrom":"web",
+			"uid":"uid"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}

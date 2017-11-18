@@ -1,0 +1,26 @@
+#########################################
+#				User					#
+#		CRUD User API v1				#
+#		URL API = /api/v1/user  		#
+#		method = application/json		#
+#########################################
+
+1. Add new user
+	- Request (e.g)
+		{
+			"m":"add",
+			"platfrom":"web",
+			"user":"user",
+			"pwd":"pwd",
+			"cpwd":"pwd",
+			"level":"1"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. 

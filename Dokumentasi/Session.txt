@@ -1,0 +1,7 @@
+Session Save
+
+1. uid_user
+2. uid_distributor
+3. level
+4. nama
+5. login

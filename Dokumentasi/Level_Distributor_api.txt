@@ -1,0 +1,71 @@
+#########################################
+#				BARANG					#
+#		CRUD Barang API v1				#
+#		URL API = /api/v1/level  		#
+#		method = application/json		#
+#########################################
+
+
+1. 	Add New level Grup Distributor into List level Grup Distributor
+
+	-Request (e.g)
+		{
+			"m":"add",
+			"platfrom":"web",
+			"nama":"Tes",
+			"persentasi_jual":"80"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. Edit level distributor in list
+	-Request (e.g)
+		{
+			"m":"edit",
+			"platfrom":"web",
+			"uid":"12",
+			"nama":"Level 1000",
+			"persentasi_jual":"150"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+3. Delete level distributor in list
+	-Request (e.g)
+		{
+			"m":"del",
+			"platfrom":"web",
+			"uid":"uid"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+4. Get Detail level distributor by UID
+	-Request (e.g)
+		{
+			"m":"getLevel",
+			"platfrom":"web",
+			"uid":"uid"
+		}
+
+	Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
