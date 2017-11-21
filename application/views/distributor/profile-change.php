@@ -3,16 +3,29 @@
 		<div class="box box-success">
 			<div class="box-body box-profile">
 				<img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/profile/').'/'.'avatar.png'?>" alt="User profile picture">
-				<h3 class="profile-username text-center"><?="Nama Session Login"?></h3>
+				<h3 class="profile-username text-center" id="session"><?="Session Login"?></h3>
 				<ul class="list-group list-group-unbordered">
-					<form id="form-profile" method="POST" action="">
+					<form id="form-profile" method="POST">
 						<li class="list-group-item">
 							<label>Nama</label>
 							<div class="input-group">
 								<div class="input-group-addon">
 									<i class="fa fa-address-card"></i>
 								</div>
+								<input type="hidden" name="m" id="m" value="edit" class="form-control" required="required">
+								<input type="hidden" name="uid" id="uid" value="<?=$uid?>" class="form-control" required="required">
+								<input type="hidden" name="level" id="level" class="form-control" value="<?=$level?>" required="required">
+								<input type="hidden" name="platfrom" id="platfrom" class="form-control" value="web" required="required">
 								<input type="text" name="nama" id="nama" class="form-control" value="" required="required" pattern="Nama" title="Nama" placeholder="Nama">
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>PT</label>
+							<div class="input-group">
+								<div class="input-group-addon">
+									<i class="fa fa-address-card-o"></i>
+								</div>
+								<input type="text" name="pt" id="pt" class="form-control" value="" required="required" pattern="PT" title="PT" placeholder="PT">
 							</div>
 						</li>
 						<li class="list-group-item">
@@ -44,8 +57,85 @@
 						</div>
 					</form>
 				</ul>
-				<a no-href class="btn btn-success btn-block"><b>Ganti</b></a>
+				<a no-href id="change" class="btn btn-primary btn-block"><b>Ganti</b></a>
+				<a href="javascript:history.back()" class="btn btn-danger btn-block"><b>Batal</b></a>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="<?=base_url('assets/js/global.js')?>"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		load("<?=$uid?>","<?=$level?>");
+		
+		$('#change').click(function(event) {
+			event.preventDefault();
+			change();
+		});
+
+		$('.form-control').keyup(function(event) {
+			if(event.keyCode==13){
+				event.preventDefault();
+				change();
+			}
+		});
+	});
+
+	function valid() {
+		var result=true;
+		$('.form-control').each(function(index, el) {
+			if($(this).prop('required') && $(this).val()==""){
+				$(this).focus();
+				var temp = $(this).parent();
+				temp.addClass('has-error');
+				result = false;
+				return false;
+			}else{
+				var temp = $(this).parent();
+				temp.removeClass('has-error');
+			}
+		});
+		return result;
+	}
+
+	function change() {
+		if(!valid()){
+			return;
+		}
+		var data = new FormData(document.getElementById('form-profile'));
+		ajaxCallForm(base_url('api/v1/profile'), data, function (data) {
+			console.log(data);
+			var json = JSON.parse(data);
+			if(json.code==200){
+				alert("Sukses");
+				load("<?=$uid?>","<?=$level?>");
+			}else{
+				alert("ERROR");
+			}
+		});
+	}
+
+	function load(uid, level) {
+		var data = {
+			"uid":uid,
+			"level":level,
+			"platfrom":"web",
+			"m":"getProfile"
+		};
+		ajaxCall(base_url('api/v1/profile'), data, function (data) {
+			var json = JSON.parse(data);
+			if(json.code==200){
+				var data = json.data;
+				$('#nama').val(data.nama);
+				$('#alamat').val(data.alamat);
+				$('#email').val(data.email);
+				$('#telp').val(data.telp);
+				$('#uid').val(data.uid);
+				$('#session').html(data.nama);
+				$('#pt').val(data.pt);
+			}else{
+				alert("ERROR LOAD");
+			}
+		});
+	}
+</script>

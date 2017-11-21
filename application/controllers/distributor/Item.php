@@ -5,24 +5,30 @@ class Item extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('grocery_CRUD');
+		$this->load->model('Session','session_s');
+		$this->load->library('session');
+		if($this->session_s->check_login()){
+			if($this->session->userdata("level")!=2){
+				redirect('login','refresh');
+			}
+		}else{
+			redirect('login','refresh');
+		}
 	}
 
 	public function index()
 	{
-		$r = new grocery_CRUD();
-		$r->set_theme('datatables');
-		$r->set_table('barang');
-		$r->unset_add();
-		$r->unset_edit();
-		$r->unset_delete();
-		$output = $r->render();
-		$atr= (array) $output;
-
 		$atr['judul_menu']="Data Barang";
+		$atr['desk_menu']="Semua data barang disini";
 		$atr['content']="distributor/item/item-list";
-		$atr['desk_menu']="Semua data  barang disini";
 		$this->load->view('distributor/template', $atr);
+	}
+
+	public function datatable()
+	{
+		header("Content-Type: application/json");
+		$this->load->model('Item_m','barang');
+		echo $this->barang->data_distributor();
 	}
 }
 

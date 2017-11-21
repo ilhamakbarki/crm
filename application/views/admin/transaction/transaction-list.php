@@ -18,7 +18,7 @@
           </tr>
         </thead>
         <tbody>
-          <?php for ($i=1; $i <= 20; $i++) { ?>
+          <!-- <?php for ($i=1; $i <= 20; $i++) { ?>
           <tr>
             <td><?=$i?></td>
             <td>T<?=rand(100000,999999)?></td>
@@ -33,7 +33,7 @@
               <a type="button" href="<?=base_url('admin/transaction/detail').'/'.$i?>" class="btn btn-sm btn-success">Detail</a>
             </td>
           </tr>
-          <?php } ?>
+          <?php } ?> -->
         </tbody>
       </table>
     </div>

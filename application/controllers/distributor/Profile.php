@@ -5,29 +5,41 @@ class Profile extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Session','session_s');
+		$this->load->library('session');
+		if($this->session_s->check_login()){
+			if($this->session->userdata("level")!=2){
+				redirect('login','refresh');
+			}
+		}else{
+			redirect('login','refresh');
+		}
 	}
 
 	public function index()
 	{
-		$atr=$this->getAttr();
+		$atr=array(
+			"judul_menu"=>"Profile Anda",
+			"desk_menu"=>"Untuk mengedit profile"
+		);
+		$atr['uid']=$this->session->userdata("uid_detail");
+		$atr['uid_user']=$this->session->userdata("uid_user");
+		$atr['level']="distributor";
 		$atr['content']="distributor/profile";
 		$this->load->view('distributor/template', $atr);
 	}
 
 	public function change()
 	{
-		$atr=$this->getAttr();
-		$atr['content']="distributor/profile-change";
-		$this->load->view('distributor/template', $atr);
-	}
-
-	private function getAttr()
-	{
-		$t = array(
+		$atr=array(
 			"judul_menu"=>"Profile Anda",
 			"desk_menu"=>"Untuk mengedit profile"
-			);
-		return $t;
+		);
+		$atr['uid']=$this->session->userdata("uid_detail");
+		$atr['uid_user']=$this->session->userdata("uid_user");
+		$atr['level']="distributor";
+		$atr['content']="distributor/profile-change";
+		$this->load->view('distributor/template', $atr);
 	}
 
 }

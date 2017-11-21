@@ -19,6 +19,17 @@ class Item_m extends CI_Model {
 			<a href=".base_url('admin/item/delete/$1')." class='btn btn-danger'>Delete</a>", 'uid');
 		return $this->datatables->generate();
 	}
+
+	function data_distributor()
+	{
+		$this->load->library('session');
+		$this->load->library('Datatables');
+		$this->datatables->select("kode, nama, satuan, FORMAT(stok,0) as stok, FORMAT(harga_barang.harga, 0) as harga");
+		$this->datatables->from('barang');
+		$this->datatables->join("harga_barang","harga_barang.uid_barang=barang.uid");
+		$this->datatables->where(array("harga_barang.uid_dgrup"=>$this->session->userdata("level_distributor")));
+		return $this->datatables->generate();
+	}
 }
 
 /* End of file Item_m.php */

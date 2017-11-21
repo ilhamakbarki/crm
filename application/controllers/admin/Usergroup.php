@@ -5,6 +5,15 @@ class Usergroup extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Session','session_s');
+		$this->load->library('session');
+		if($this->session_s->check_login()){
+			if($this->session->userdata("level")!=1){
+				redirect('login','refresh');
+			}
+		}else{
+			redirect('login','refresh');
+		}
 	}
 
 	public function index()

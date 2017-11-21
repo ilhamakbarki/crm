@@ -5,6 +5,15 @@ class User extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->model('Session','session_s');
+		$this->load->library('session');
+		if($this->session_s->check_login()){
+			if($this->session->userdata("level")!=1){
+				redirect('login','refresh');
+			}
+		}else{
+			redirect('login','refresh');
+		}
 	}
 
 	public function index()
@@ -39,7 +48,7 @@ class User extends CI_Controller {
 			"desk_menu"=>"Untuk menghapus user dari sistem"
 			);
 		$atr['content']="admin/user/user-del";
-		$atr['distributor']=$id;
+		$atr['user']=$id;
 		$this->load->view('admin/template', $atr);
 	}
 

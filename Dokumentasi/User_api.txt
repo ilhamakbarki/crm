@@ -62,9 +62,9 @@
 			"m":"edit",
 			"platfrom":"web",
 			"uid":"1",
-			"user":"",
-			"pwd":"",
-			"cpwd":"",
+			"user":"ilham",
+			"pwd":"Kusuma83",
+			"cpwd":"Kusuma83",
 			"changePwd":true,
 			"level":"1"
 		}

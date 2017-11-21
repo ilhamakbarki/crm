@@ -46,7 +46,7 @@
             <img src="<?=base_url('assets/profile/').'/'.'distributor.png'?>" class="img-circle" alt="User Image">
           </div>
           <div class="pull info">
-            <p><?="Nama Distributor"?></p>
+            <p><?=$this->session->userdata('nama')?></p>
           </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->

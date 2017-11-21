@@ -115,6 +115,7 @@
       json = JSON.parse(data);
       if(json.code==200){
         $('.form-control').val("");
+        $('#nama').focus();
         alert("Sukses Input Data");
       }else{
         alert("Error Perbaiki Data");

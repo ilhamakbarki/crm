@@ -44,7 +44,7 @@
             <img src="<?=base_url('assets/profile/').'/'.'avatar.png'?>" class="img-circle" alt="User Image">
           </div>
           <div class="pull info">
-            <?="Ilham Akbar"?>
+            <?=$this->session->userdata('nama')?>
           </div>
         </div>
         <!-- sidebar menu: : style can be found in sidebar.less -->
@@ -82,6 +82,11 @@
           <li>
             <a href="<?=base_url('admin/item')?>">
               <i class="fa fa-product-hunt"></i> <span>Produk</span>
+            </a>
+          </li>
+          <li>
+            <a href="<?=base_url('admin/notif')?>">
+              <i class="fa fa-university"></i><span>Kirim Notifikasi</span>
             </a>
           </li>
           <li>
@@ -171,13 +176,13 @@
     </aside>
     <!-- /.control-sidebar -->
   <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
-</div>
-<script type="text/javascript">
-  $(document).ready(function(e) {
-    $('.sidebar-menu').tree();
-  });
-</script>
+    immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+  </div>
+  <script type="text/javascript">
+    $(document).ready(function(e) {
+      $('.sidebar-menu').tree();
+    });
+  </script>
 </body>
 </html>

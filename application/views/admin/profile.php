@@ -25,14 +25,14 @@
 			<div class="box-body box-profile">
 				<h3 class="profile-username text-center">Ganti Password	</h3>
 				<ul class="list-group list-group-unbordered">
-					<form id="form-profile" method="POST">
+					<form id="form-profile" method="POST" action="">
 						<li class="list-group-item">
 							<label>Password Baru</label>
-							<div class="input-group" id="pwdold-group">
+							<div class="input-group" id="pwdnew-group">
 								<div class="input-group-addon">
 									<i class="fa fa-lock"></i>
 								</div>
-								<input type="password" name="pwdold" id="pwdold" class="form-control" value="" required="required" pattern="Password Baru" title="Password Baru" placeholder="Password Baru">
+								<input type="password" name="pwdnew" id="pwdnew" class="form-control" value="" required="required" pattern="Password Baru" title="Password Baru" placeholder="Password Baru">
 								<input type="hidden" name="m" value="changePassword">
 								<input type="hidden" name="platfrom" value="web">
 								<input type="hidden" name="uid" value="<?=$uid_user?>">
@@ -41,20 +41,20 @@
 						</li>
 						<li class="list-group-item">
 							<label>Konfirmasi Password Baru</label>
-							<div class="input-group" id="pwdnew-group">
-								<div class="input-group-addon">
-									<i class="fa fa-lock"></i>
-								</div>
-								<input type="password" name="pwdnew" id="pwdnew" class="form-control" value="" required="required" pattern="Konfirmasi Password Baru" title="Konfirmasi Password Baru" placeholder="Konfirmasi Password Baru">
-							</div>
-						</li>
-						<li class="list-group-item">
-							<label>Password Lama</label>
 							<div class="input-group" id="cpwdnew-group">
 								<div class="input-group-addon">
 									<i class="fa fa-lock"></i>
 								</div>
-								<input type="password" name="cpwdnew" id="cpwdnew" class="form-control" value="" required="required" pattern="Password Lama" title="Password Lama" placeholder="Password Lama">
+								<input type="password" name="cpwdnew" id="cpwdnew" class="form-control" value="" required="required" pattern="Konfirmasi Password Baru" title="Konfirmasi Password Baru" placeholder="Konfirmasi Password Baru">
+							</div>
+						</li>
+						<li class="list-group-item">
+							<label>Password Lama</label>
+							<div class="input-group" id="pwdold-group">
+								<div class="input-group-addon">
+									<i class="fa fa-lock"></i>
+								</div>
+								<input type="password" name="pwdold" id="pwdold" class="form-control" value="" required="required" pattern="Password Lama" title="Password Lama" placeholder="Password Lama">
 							</div>
 						</li>
 					</form>

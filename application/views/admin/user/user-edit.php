@@ -24,6 +24,15 @@
           </div>
           <p style="color: gray; font-size: 14px;">Password tidak berubah</i></p>
           <br>
+          <label>Konfirmasi Password</label>
+          <div class="input-group">
+            <div class="input-group-addon">
+              <i class="fa fa-lock"></i>
+            </div>
+            <input type="password" name="cpwd" id="cpwd" class="form-control" title="Konfirmasi Password" placeholder="Konfirmasi Password">
+          </div>
+          <p style="color: gray; font-size: 14px;">Password tidak berubah</i></p>
+          <br>
           <label>Level Akun</label>
           <div class="input-group">
             <div class="input-group-addon">
@@ -31,13 +40,13 @@
             </div>
             <select name="level" id="level" class="form-control">
               <?php foreach ($level as $level) { ?>
-              <option value="<?=$level->uid?>"><?=$level->nama?></option>
+              <option id="L<?=$level->uid?>" value="<?=$level->uid?>"><?=$level->nama?></option>
               <?php } ?>
             </select>
           </div>
           <br>
           <center>
-            <a type="button" id="save" class="btn btn-primary">Tambah</a>
+            <a type="button" id="save" class="btn btn-primary">Simpan</a>
             <a href="javascript:history.back()" type="button" class="btn btn-danger">Batal</a>
           </center>
         </form>
@@ -99,15 +108,28 @@
     if(!valid()||uid==null){
       return;
     }
-    $('body').loading();
-    var json = JSON.stringify({
+    var data = {
       "m":"edit",
       "platfrom":"web",
       "uid":uid,
-      "nama":$('#nama').val(),
-      "persentasi_jual":$('#percent').val()
-    });
-    ajaxCallJson(base_url('api/v1/level'),json,function(data) {
+      "user":$('#nama').val(),
+      "pwd":$('#pwd').val(),
+      "cpwd":$('#cpwd').val(),
+      "changePwd":false,
+      "level":$('#level').val()
+    };
+    if($('#pwd').val()!=$('#cpwd').val()){
+      var parent = $('#cpwd').parent();
+      parent.addClass('has-error');
+      $('#cpwd').focus();
+      return;
+    }
+    if($('#pwd').val()!=""){
+      data.changePwd=true;
+    }
+    var json = JSON.stringify(data);
+    $('body').loading();
+    ajaxCallJson(base_url('api/v1/user'),json,function(data) {
       $('body').loading("stop");
       json = JSON.parse(data);
       if(json.code==200){
@@ -121,10 +143,9 @@
       }
     });
   }
-
   function load(t) {
     var json = JSON.stringify({
-      "m":"getLevel",
+      "m":"getUser",
       "platfrom":"web",
       "uid":t
     });
@@ -132,8 +153,8 @@
       json = JSON.parse(data);
       if(json.code==200){
         var data = json.data;
-        $('#nama').val(data.nama);
-        $('#percent').val(data.persentasi_jual);
+        $('#nama').val(data.user);
+        $('#L'+data.level).prop('selected', 'selected');
         uid = data.uid;
       }else{
         alert("ERROR LOAD!!!");

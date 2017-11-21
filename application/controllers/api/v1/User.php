@@ -87,6 +87,32 @@ class User extends CI_Controller {
 		$this->response(200, "OK");
 	}
 
+	private function edit($json)
+	{
+		$this->load->model('Table','table');
+		if(!isset($json->uid)||!isset($json->user)||!isset($json->changePwd)||!isset($json->level)){
+			$this->response(204, "ERROR PARAM");
+			return;
+		}
+		$set = array(
+			"uid"=>$json->uid,
+			"user"=>$json->user,
+			"level"=>$json->level
+		);
+		if($json->changePwd && !($json->pwd==$json->cpwd)){
+			$this->response(204, "ERROR PASSWORD");
+			return;
+		}else{
+			$set["pwd"]=crypt($json->pwd, '$6$3h2aNvRm&shGWEsaWeo42iqILsiPowjUjskKkli9koitJkl$');
+		}
+		$result=$this->table->update($set, array("uid"=>$json->uid), "user");
+		if(!$result['status']){
+			$this->response(204, "UPDATE FAIL");
+			return;
+		}
+		$this->response(200, "OK");
+	}
+
 	function datatable()
 	{
 		header("Content-Type: application/json");
