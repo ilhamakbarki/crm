@@ -19,10 +19,10 @@ class Notif_m extends CI_Model {
 
 	public function getUser($id)
 	{
-		return $this->db->select("distributor.*, user.user")
+		return $this->db->select("distributor.*, user.user, user.uid as uid_user")
 		->from("distributor")
-		->join("user","user.uid=distributor.id_u","left")
-		->where(array("distributor.uid"=>$id))
+		->join("user","user.uid=distributor.id_u")
+		->where($id)
 		->get();
 	}
 }

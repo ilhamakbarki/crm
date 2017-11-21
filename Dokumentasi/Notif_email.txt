@@ -1,0 +1,36 @@
+#########################################
+#			Kirim Email					#
+#			    API v1					#
+#		URL API = /api/v1/notif  		#
+#		method = application/json		#
+#########################################
+
+1. Send notif update harga
+	- Request (e.g)
+		{
+			"m":"sendUpdateHarga",
+			"platfrom":"web",
+			"receipt":"uid"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. Forgot Password
+	- Request (e.g)
+		{
+			"m":"sendForgotP",
+			"platfrom":"web",
+			"email":"email"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}

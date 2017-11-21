@@ -19,7 +19,7 @@ class Email extends CI_Model {
 		$this->email->from($config["smtp_user"],'Trading Kusuma');
 		$this->email->subject($subject);
 		$this->email->message($message);
-		$this->email->send();
+		return $this->email->send();
 	}
 
 }

@@ -15,12 +15,20 @@ class Level extends CI_Controller {
 			$this->response(204, "ERROR");
 			return;
 		}
+		if($json->platfrom=="web"){
+			$this->load->model('Session');
+			if(!$this->Session->check_login()){
+				return;
+			}
+		}else{
+			return;
+		}
 		$allowedMethods = array(
 			'add',
 			'edit',
 			'del',
 			'getLevel'
-			);
+		);
 		$methodName = isset($json->m) ? $json->m : '';
 		$this->run($methodName, $allowedMethods, $json);
 	}
@@ -48,7 +56,7 @@ class Level extends CI_Controller {
 		$level=array(
 			"nama"=>$json->nama,
 			"persentasi_jual"=>$json->persentasi_jual
-			);
+		);
 		$result=$this->table->add($level, "distributor_grup");
 		if(!$result['status']){
 			$this->response(204, "ERROR");
@@ -88,7 +96,7 @@ class Level extends CI_Controller {
 			"uid"=>$json->uid,
 			"nama"=>$json->nama,
 			"persentasi_jual"=>$json->persentasi_jual,
-			);
+		);
 		$result=$this->table->update($level, array("uid"=>$json->uid), "distributor_grup");
 		if(!$result['status']){
 			$this->response(204, "ERROR");

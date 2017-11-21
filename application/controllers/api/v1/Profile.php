@@ -10,6 +10,10 @@ class Profile extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->model('Session');
+		if(!$this->Session->check_login()){
+			return;
+		}
 		if(!$this->profile->f_m_plat()){
 			$this->response(204, "ERROR");
 			return;

@@ -22,7 +22,8 @@ class Notif extends CI_Controller {
 		$atr = array(
 			"judul_menu"=>"Kirim notifikasi email",
 			"desk_menu"=>"Untuk mengirim notifikasi",
-			"content"=>"admin/notif"
+			"content"=>"admin/notif",
+			"distributor"=>$this->table->getAll("distributor")->result()
 		);
 		$this->load->view('admin/template', $atr);
 	}

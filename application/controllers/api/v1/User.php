@@ -13,9 +13,12 @@ class User extends CI_Controller {
 		$json = json_decode(file_get_contents('php://input'));
 		if(isset($json->platfrom)||isset($json->m)){
 			if($json->platfrom=="web"){
-
+				$this->load->model('Session');
+				if(!$this->Session->check_login()){
+					return;
+				}
 			}else{
-
+				return;
 			}
 		}else{
 			$this->response(204, "Params");

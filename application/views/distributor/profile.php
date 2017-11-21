@@ -2,7 +2,7 @@
 	<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 		<div class="box box-success">
 			<div class="box-body box-profile">
-				<img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/profile/').'/'.'avatar.png'?>" alt="User profile picture">
+				<img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/profile/').'/'.'distributor.png'?>" alt="User profile picture">
 				<h3 class="profile-username text-center" id="nama"><?=$this->session->userdata('nama')?></h3>
 				<ul class="list-group list-group-unbordered">
 					<li class="list-group-item">

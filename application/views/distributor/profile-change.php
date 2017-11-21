@@ -2,7 +2,7 @@
 	<div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3 col-xs-6 col-sm-6 col-md-6 col-lg-6">
 		<div class="box box-success">
 			<div class="box-body box-profile">
-				<img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/profile/').'/'.'avatar.png'?>" alt="User profile picture">
+				<img class="profile-user-img img-responsive img-circle" src="<?=base_url('assets/profile/').'/'.'distributor.png'?>" alt="User profile picture">
 				<h3 class="profile-username text-center" id="session"><?="Session Login"?></h3>
 				<ul class="list-group list-group-unbordered">
 					<form id="form-profile" method="POST">

@@ -51,8 +51,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'Login';
 $route['404_override'] = 'Error404';
-$route['Distributor'] = 'distributor/Item/';
-$route['distributor'] = 'distributor/Item/';
+$route['distributor'] = 'distributor/item';
+$route['Distributor'] = 'distributor/item';
 $route['Admin'] = 'admin/item';
 $route['admin'] = 'admin/item';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = true;

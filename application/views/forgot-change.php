@@ -31,23 +31,41 @@
 	<div class="login-box">
 		<center><img src="<?=base_url('assets/img/kusuma.png')?>" width="120"></center>
 		<div class="login-logo">
-			<a><b>Lupa</b> Password</a>
+			<a><b>Ganti</b> Password</a>
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">
 			<p class="login-box-msg">Distributor Kusuma Agrowisata</p>
-			<div class="form-group has-feedback">
-				<input type="text" name="email" id="email" class="form-control" required="required" placeholder="Email">
-				<span class="glyphicon glyphicon-user form-control-feedback"></span>
-			</div>
-			<div class="row">
-				<!-- /.col -->
-				<div class="col-xs-12">
-					<a id="kirim" class="btn btn-primary btn-block btn-flat">Kirim</a>
-					<p id ="status"></p>
+			<form id="form-forget" method="post">
+				<label>Password Baru</label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-lock"></i>
+					</div>
+					<input type="hidden" name="uid" id="uid" class="form-control" value="<?=$uid?>" required="required">
+					<input type="hidden" name="m" id="m" class="form-control" value="change" required="required">
+					<input type="hidden" name="platfrom" id="platfrom" class="form-control" value="web" required="required">
+					<input type="hidden" name="token" id="token" class="form-control" value="<?=$token?>" required="required">
+					<input type="password" name="pwd" id="pwd" class="form-control" value="" required="required" pattern="Password" title="Password" placeholder="Password">
 				</div>
-				<!-- /.col -->
-			</div>			
+				<br>
+				<label>Konfirmasi Password Baru</label>
+				<div class="input-group">
+					<div class="input-group-addon">
+						<i class="fa fa-lock"></i>
+					</div>
+					<input type="password" name="cpwd" id="cpwd" class="form-control" value="" required="required" pattern="Konfirmasi Password" title="Konfirmasi Password" placeholder="Konfirmasi Password">
+				</div>
+				<br>
+				<div class="row">
+					<!-- /.col -->
+					<div class="col-xs-12">
+						<a id="ganti" class="btn btn-primary btn-block btn-flat">Ganti Password</a>
+						<p id ="status"></p>
+					</div>
+					<!-- /.col -->
+				</div>
+			</form>
 		</div>
 		<!-- /.login-box-body -->
 	</div>
@@ -57,6 +75,8 @@
 	<script src="<?=base_url()?>assets/lte/bower_components/jquery/dist/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.7 -->
 	<script src="<?=base_url()?>assets/lte/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- iCheck -->
+	<script src="<?=base_url()?>assets/lte/plugins/iCheck/icheck.min.js"></script>
 
 	<!-- Globaljs-->
 	<script type="text/javascript">var url="<?=base_url()?>";</script>
@@ -64,17 +84,34 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('.form-control').keyup(function(event) {
-				event.preventDefault();
 				if(event.keyCode==13){
-					kirim();	
+					event.preventDefault();
+					ganti();	
 				}
 			});
 
-			$('#kirim').click(function(event) {
+			$('#ganti').click(function(event) {
 				event.preventDefault();
-				kirim();
+				ganti();
 			});
 		});
+
+		function ganti() {
+			if(!valid()){
+				return;
+			}
+			var data = new FormData(document.getElementById('form-forget'));
+			ajaxCallForm(base_url('api/v1/forgot'), data, function (data) {
+				var response = $.parseJSON(data);
+				if(response.code==200){
+					alert("SUKSES GANTI PASSWORD");
+					window.location.href="<?=base_url('login')?>";
+					$('#status').html("");
+				}else{
+					$('#status').html("ERROR");
+				}
+			});
+		}
 
 		function valid() {
 			var result=true;
@@ -91,25 +128,6 @@
 				}
 			});
 			return result;
-		}
-
-		function kirim() {
-			if(!valid()){
-				return;
-			}
-			var data = JSON.stringify({
-				"m":"sendForgotP",
-				"platfrom":"web",
-				"email":$('#email').val()
-			});
-			ajaxCallJson(base_url('api/v1/notif'), data, function (data) {
-				var response = $.parseJSON(data);
-				if(response.code==200){
-					$('#status').html("Silahkan check email anda");
-				}else{
-					$('#status').html("Gagal silahkan coba lagi");
-				}
-			});
 		}
 	</script>
 </body>

@@ -23,6 +23,14 @@ class Setting extends CI_Model {
 		return $config;
 	}
 
+	public function diff_datetime($datetime1, $datetime2)
+	{
+		$dteStart = new DateTime($datetime1); 
+		$dteEnd   = new DateTime($datetime2);
+		$dteDiff  = $dteStart->diff($dteEnd);
+		return $dteDiff->format("%I");
+	}
+
 }
 
 /* End of file Setting.php */

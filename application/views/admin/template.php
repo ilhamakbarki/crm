@@ -86,7 +86,7 @@
           </li>
           <li>
             <a href="<?=base_url('admin/notif')?>">
-              <i class="fa fa-university"></i><span>Kirim Notifikasi</span>
+              <i class="fa fa-envelope"></i><span>Kirim Notifikasi</span>
             </a>
           </li>
           <li>

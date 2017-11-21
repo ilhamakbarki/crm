@@ -13,9 +13,12 @@ class Item extends CI_Controller {
 		$json = json_decode(file_get_contents('php://input'));
 		if(isset($json->platfrom)||isset($json->m)){
 			if($json->platfrom=="web"){
-
+				$this->load->model('Session');
+				if(!$this->Session->check_login()){
+					return;
+				}
 			}else{
-
+				return;
 			}
 		}else{
 			$this->response(204, "Params");
@@ -26,7 +29,7 @@ class Item extends CI_Controller {
 			'edit',
 			'del',
 			'getItem'
-			);
+		);
 		$methodName = isset($json->m) ? $json->m : '';
 		$this->run($methodName, $allowedMethods, $json);
 	}
@@ -65,7 +68,7 @@ class Item extends CI_Controller {
 			"satuan"=>$json->satuan,
 			"stok"=>$json->stok,
 			"beli"=>$json->beli
-			);
+		);
 		$result=$this->table->add($barang, "barang");
 		if(!$result['status']){
 			$this->response(204, "ERROR");
@@ -77,7 +80,7 @@ class Item extends CI_Controller {
 				"uid_barang"=>$uid,
 				"uid_dgrup"=>$grup->uid,
 				"harga"=>$json->{"K".$grup->uid}
-				);
+			);
 			$result=$this->table->add($t, "harga_barang");
 			if(!$result['status']){
 				$this->table->del(array("uid_barang"=>$uid), "harga_barang");
@@ -108,7 +111,7 @@ class Item extends CI_Controller {
 			"satuan"=>$json->satuan,
 			"stok"=>$json->stok,
 			"beli"=>$json->beli
-			);
+		);
 		$result=$this->table->update($barang, array("uid"=>$json->uid), "barang");
 		if(!$result['status']){
 			$this->response(204, "ERROR");
