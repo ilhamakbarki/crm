@@ -44,11 +44,11 @@ class Notif extends CI_Controller {
 			$this->response(204, "NO USER");
 			return;
 		}
-		$message = "<p>Selamat sore ".$d->nama."</p>
-		<p>Kami sampaikan update harga terbaru dari kusuma agro, silahkan cek harga di link berikut ini :</p>
-		<p>&nbsp;</p><p><a title='Distributor Kusuma Trading' href='".base_url()."' target='_blank' rel='noopener'>".base_url()."</a></p>
-		<p><strong>Username : ".$d->user."</strong></p>
-		<p><strong>Password : kusumaagro (default) sebelum dirubah</strong></p>
+		$message = "<p>Kepada ".$d->nama."</p>
+		<p>Kami sampaikan update harga terbaru dari trading kusuma agro, silahkan cek harga di link berikut ini :</p>
+		<p>&nbsp;</p><p><a title='Distributor Kusuma Trading' href='".base_url()."' target='_blank' rel='noopener'>".base_url()."</a></p><br>
+		<p>Username : <strong>".$d->user."</strong></p>
+		<p>Password<i>(default)</i> : <strong>kusumaagro</strong></p>
 		<p>&nbsp;</p>
 		<p>Terimakasih atas bantuan dan kerjasamanya</p>
 		<p>&nbsp;</p>
