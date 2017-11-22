@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.7.5
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2017 at 08:48 AM
--- Server version: 5.7.20-0ubuntu0.16.04.1
--- PHP Version: 7.0.22-0ubuntu0.16.04.1
+-- Waktu pembuatan: 22 Nov 2017 pada 08.23
+-- Versi server: 10.1.28-MariaDB
+-- Versi PHP: 7.1.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Struktur dari tabel `admin`
 --
 
 CREATE TABLE `admin` (
@@ -36,16 +38,17 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `admin`
+-- Dumping data untuk tabel `admin`
 --
 
 INSERT INTO `admin` (`uid`, `nama`, `alamat`, `email`, `telp`, `id_u`) VALUES
-(1, 'Ilham Akbar', 'Kacongan', 'ilhamakbarki@gmail.com', '087750002605', NULL);
+(1, 'Ilham Akbar', 'Kacongan', 'ilhamakbarki@gmail.com', '087750002605', 1),
+(2, 'Tri Rahmawatiningsih', 'Ponorogo', 'trirahmawat@gmail.com', '087758018257', 10);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -58,16 +61,17 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data untuk tabel `barang`
 --
 
 INSERT INTO `barang` (`uid`, `kode`, `nama`, `satuan`, `stok`, `beli`) VALUES
-(20, 'RD01', 'NFC Reader', 'Pack', 100, 500000);
+(20, 'RD01', 'NFC Reader', 'Pack', 100, 500000),
+(21, 'AQ01', 'Aqua 250ML', 'KARDUS', 1000, 2500);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `distributor`
+-- Struktur dari tabel `distributor`
 --
 
 CREATE TABLE `distributor` (
@@ -82,17 +86,18 @@ CREATE TABLE `distributor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `distributor`
+-- Dumping data untuk tabel `distributor`
 --
 
 INSERT INTO `distributor` (`uid`, `nama`, `pt`, `alamat`, `email`, `telp`, `id_u`, `grup`) VALUES
-(4, 'Ilham Akbar New', 'coba coba', 'Alamat New', 'emailbaru@gmail.com', '087750002605', NULL, 2),
-(7, 'Akbar', 'kabar', 'kacongan', 'ilhamakbarki@gmail.com', '087750002605', NULL, 2);
+(7, 'Distributor Laptop', 'Distributor', 'Kacongan', 'ilhamakbarki@gmail.com', '087750002605', 2, 18),
+(8, 'Aqua', 'Danone', 'pandaan', 'trirahmawat@gmail.com', '08775002605', 11, 3),
+(9, 'Bayu Indra Wicaksono', 'UMM', 'malang', 'bayugames69@gmail.com', '0819337733836', 12, 17);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `distributor_grup`
+-- Struktur dari tabel `distributor_grup`
 --
 
 CREATE TABLE `distributor_grup` (
@@ -102,7 +107,7 @@ CREATE TABLE `distributor_grup` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `distributor_grup`
+-- Dumping data untuk tabel `distributor_grup`
 --
 
 INSERT INTO `distributor_grup` (`uid`, `nama`, `persentasi_jual`) VALUES
@@ -110,12 +115,12 @@ INSERT INTO `distributor_grup` (`uid`, `nama`, `persentasi_jual`) VALUES
 (3, 'Level 3', 80),
 (4, 'Level 1', 100),
 (17, 'Level 4', 70),
-(18, 'Level 5', 60);
+(18, 'Level 5', 65);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `harga_barang`
+-- Struktur dari tabel `harga_barang`
 --
 
 CREATE TABLE `harga_barang` (
@@ -125,7 +130,7 @@ CREATE TABLE `harga_barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `harga_barang`
+-- Dumping data untuk tabel `harga_barang`
 --
 
 INSERT INTO `harga_barang` (`uid_barang`, `uid_dgrup`, `harga`) VALUES
@@ -133,12 +138,17 @@ INSERT INTO `harga_barang` (`uid_barang`, `uid_dgrup`, `harga`) VALUES
 (20, 3, 900000),
 (20, 4, 1000000),
 (20, 17, 850000),
-(20, 18, 800000);
+(20, 18, 825000),
+(21, 2, 4750),
+(21, 3, 4500),
+(21, 4, 5000),
+(21, 17, 4250),
+(21, 18, 5000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `user`
 --
 
 CREATE TABLE `user` (
@@ -152,17 +162,20 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`uid`, `user`, `pwd`, `level`, `token_api`, `token_forgot`, `forgot_time`) VALUES
-(1, 'ilham', '$6$3h2aNvRm&shGWEsa$cyZdPZJVLtvWnjhx8a9bmYsHqDNCnAHFxJGWoEgr/W1gNOtGdSRC.Zjos62.Hhk5TVQjgxrsYgWwXMpXx6VPc0', 1, NULL, NULL, NULL),
-(2, 'distributor', '$6$3h2aNvRm&shGWEsa$cyZdPZJVLtvWnjhx8a9bmYsHqDNCnAHFxJGWoEgr/W1gNOtGdSRC.Zjos62.Hhk5TVQjgxrsYgWwXMpXx6VPc0', 2, NULL, NULL, NULL);
+(1, 'ilham', '$6$3h2aNvRm&shGWEsa$XhC59ZvO7Ra6g/8GtNrEU5IwZe433emqAq/EoJJbx1CAjsgKfI8f1rKB1O4x84wEH5yIgDJdP4rsK52reFVgb/', 1, NULL, NULL, NULL),
+(2, 'distributorlaptop', '$6$3h2aNvRm&shGWEsa$0qmZmSaijEY7WrHQMmZxwtWNhP8qgSOuLuqp4RxJ0AH0/UJfMz6CBZpC4bjTDCfdn6mxI0Bo1Z3smvbPjeXxs0', 2, NULL, NULL, NULL),
+(10, 'rahma', '$6$3h2aNvRm&shGWEsa$cyZdPZJVLtvWnjhx8a9bmYsHqDNCnAHFxJGWoEgr/W1gNOtGdSRC.Zjos62.Hhk5TVQjgxrsYgWwXMpXx6VPc0', 1, 'r1zlHI0Lm1p1LUTyDW49', NULL, NULL),
+(11, 'distributoraqua', '$6$3h2aNvRm&shGWEsa$5j0MzVAg4PK8jMvpAAZx51ffgeAUVL1h21JjfF.M9KqjDj1Zd8XK7zS/5Myi4JdK6WRV8PvZvz6L779f84gW3.', 2, 'bWihjNkKyn6i8sYrVmeA', NULL, NULL),
+(12, 'kusumaagro', '$6$3h2aNvRm&shGWEsa$eA3IIkVHVYWfa4VPxI/E./LsfFMv9gMKCihvgRMZoRlcSN4ZzLZHlHAT.NyDxomRerlY/8dSl0q85jiT9zEKg/', 2, 'G419LmEFuVvJ01xrivZ1', NULL, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_level`
+-- Struktur dari tabel `user_level`
 --
 
 CREATE TABLE `user_level` (
@@ -171,7 +184,7 @@ CREATE TABLE `user_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `user_level`
+-- Dumping data untuk tabel `user_level`
 --
 
 INSERT INTO `user_level` (`uid`, `nama`) VALUES
@@ -183,7 +196,7 @@ INSERT INTO `user_level` (`uid`, `nama`) VALUES
 --
 
 --
--- Indexes for table `admin`
+-- Indeks untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`uid`),
@@ -191,14 +204,14 @@ ALTER TABLE `admin`
   ADD KEY `id_u` (`id_u`);
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`uid`),
   ADD UNIQUE KEY `kode` (`kode`);
 
 --
--- Indexes for table `distributor`
+-- Indeks untuk tabel `distributor`
 --
 ALTER TABLE `distributor`
   ADD PRIMARY KEY (`uid`),
@@ -207,13 +220,13 @@ ALTER TABLE `distributor`
   ADD KEY `grup` (`grup`);
 
 --
--- Indexes for table `distributor_grup`
+-- Indeks untuk tabel `distributor_grup`
 --
 ALTER TABLE `distributor_grup`
   ADD PRIMARY KEY (`uid`);
 
 --
--- Indexes for table `harga_barang`
+-- Indeks untuk tabel `harga_barang`
 --
 ALTER TABLE `harga_barang`
   ADD PRIMARY KEY (`uid_barang`,`uid_dgrup`),
@@ -221,7 +234,7 @@ ALTER TABLE `harga_barang`
   ADD KEY `uid_dgrup` (`uid_dgrup`);
 
 --
--- Indexes for table `user`
+-- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uid`),
@@ -229,74 +242,81 @@ ALTER TABLE `user`
   ADD KEY `level` (`level`);
 
 --
--- Indexes for table `user_level`
+-- Indeks untuk tabel `user_level`
 --
 ALTER TABLE `user_level`
   ADD PRIMARY KEY (`uid`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT untuk tabel `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
 --
--- AUTO_INCREMENT for table `distributor`
+-- AUTO_INCREMENT untuk tabel `distributor`
 --
 ALTER TABLE `distributor`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
--- AUTO_INCREMENT for table `distributor_grup`
+-- AUTO_INCREMENT untuk tabel `distributor_grup`
 --
 ALTER TABLE `distributor_grup`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
 --
--- AUTO_INCREMENT for table `user`
+-- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
 --
--- AUTO_INCREMENT for table `user_level`
+-- AUTO_INCREMENT untuk tabel `user_level`
 --
 ALTER TABLE `user_level`
   MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `admin`
+-- Ketidakleluasaan untuk tabel `admin`
 --
 ALTER TABLE `admin`
   ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`id_u`) REFERENCES `user` (`uid`);
 
 --
--- Constraints for table `distributor`
+-- Ketidakleluasaan untuk tabel `distributor`
 --
 ALTER TABLE `distributor`
   ADD CONSTRAINT `distributor_ibfk_2` FOREIGN KEY (`id_u`) REFERENCES `user` (`uid`),
   ADD CONSTRAINT `distributor_ibfk_3` FOREIGN KEY (`grup`) REFERENCES `distributor_grup` (`uid`);
 
 --
--- Constraints for table `harga_barang`
+-- Ketidakleluasaan untuk tabel `harga_barang`
 --
 ALTER TABLE `harga_barang`
   ADD CONSTRAINT `harga_barang_ibfk_1` FOREIGN KEY (`uid_barang`) REFERENCES `barang` (`uid`),
   ADD CONSTRAINT `harga_barang_ibfk_2` FOREIGN KEY (`uid_dgrup`) REFERENCES `distributor_grup` (`uid`);
 
 --
--- Constraints for table `user`
+-- Ketidakleluasaan untuk tabel `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`level`) REFERENCES `user_level` (`uid`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
