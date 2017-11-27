@@ -4,7 +4,8 @@
 <!-- Default box -->
 <div class="box box-primary">
   <div class="box-body">
-    <a href="<?=base_url('admin/item/add')?>" type="button" class="btn btn-primary">Tambah</a>
+    <a href="<?=base_url('admin/item/add')?>" type="button" class="btn btn-primary"><i class="fa fa-plus"></i> Tambah</a>
+    <a href="<?=base_url('admin/cetak')?>" type="button" class="btn btn-success"><i class="fa fa-print"></i> Cetak</a>
     <br><br>
     <div class="table-responsive">
       <table class="table table-hover table-striped width-full datatable" data-plugin="dataTable">

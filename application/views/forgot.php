@@ -98,14 +98,13 @@
 				return;
 			}
 			var data = JSON.stringify({
-				"m":"sendForgotP",
-				"platfrom":"web",
 				"email":$('#email').val()
 			});
-			ajaxCallJson(base_url('api/v1/notif'), data, function (data) {
+			ajaxCallJson(base_url('forgot/sendForgotP'), data, function (data) {
 				var response = $.parseJSON(data);
 				if(response.code==200){
-					$('#status').html("Silahkan check email anda");
+					alert("Silahkan Check Email");
+					$('#status').html("");
 				}else{
 					$('#status').html("Gagal silahkan coba lagi");
 				}

@@ -98,7 +98,6 @@ class User extends CI_Controller {
 			return;
 		}
 		$set = array(
-			"uid"=>$json->uid,
 			"user"=>$json->user,
 			"level"=>$json->level
 		);

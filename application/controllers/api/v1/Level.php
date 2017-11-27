@@ -93,7 +93,6 @@ class Level extends CI_Controller {
 			$ganti = false;
 		}
 		$level=array(
-			"uid"=>$json->uid,
 			"nama"=>$json->nama,
 			"persentasi_jual"=>$json->persentasi_jual,
 		);

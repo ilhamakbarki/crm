@@ -95,6 +95,7 @@
       "persentasi_jual":$('#percent').val()
     });
     ajaxCallJson(base_url('api/v1/level'),json,function(data) {
+      console.log(data);
       $('body').loading("stop");
       json = JSON.parse(data);
       if(json.code==200){

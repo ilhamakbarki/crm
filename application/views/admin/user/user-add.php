@@ -110,12 +110,14 @@
       "cpwd":cpwd,
       "level":$('#level').val()
     });
+    var level = $('#level').val();
     ajaxCallJson(base_url('/api/v1/user'), json, function (data) {
       $('#loading-template').loading("stop");
       json = JSON.parse(data);
       if(json.code==200){
         $('.form-control').val("");
         $('#nama').focus();
+        $('#level').val(level);
         alert("Sukses Input Data");
       }else{
         alert("Error Perbaiki Data");

@@ -9,6 +9,7 @@ class Forgot extends CI_Controller {
 
 	public function index()
 	{
+		
 		$this->load->model("Forgot_m");
 		if(!$this->Forgot_m->f_m_plat()){
 			$this->response(204, "ERROR");
@@ -29,7 +30,7 @@ class Forgot extends CI_Controller {
 			return;
 		}
 		$this->load->model('Table');
-		$result = $this->Table->update(array("uid"=>$this->input->post('uid', TRUE), "pwd"=>crypt($this->input->post('pwd', TRUE), '$6$3h2aNvRm&shGWEsaWeo42iqILsiPowjUjskKkli9koitJkl$')), array("uid"=>$this->input->post('uid', TRUE), "token_forgot"=>$this->input->post('token', TRUE)), "user");
+		$result = $this->Table->update(array("pwd"=>crypt($this->input->post('pwd', TRUE), '$6$3h2aNvRm&shGWEsaWeo42iqILsiPowjUjskKkli9koitJkl$')), array("uid"=>$this->input->post('uid', TRUE), "token_forgot"=>$this->input->post('token', TRUE)), "user");
 		if(!$result['status']){
 			$this->response(204,"ERROR UPDATE PASSWORD");
 			return;

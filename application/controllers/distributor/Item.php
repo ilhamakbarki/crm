@@ -30,6 +30,15 @@ class Item extends CI_Controller {
 		$this->load->model('Item_m','barang');
 		echo $this->barang->data_distributor();
 	}
+
+	public function excel()
+	{
+		$this->load->model('Cetak_m','cetak');
+		$this->load->model('Table','table');
+		$distributor = $this->table->getSelectedData("*", array("uid"=>$this->session->userdata('uid_detail')), "distributor")->row();
+		$result = $this->cetak->barang($distributor->grup);
+		$this->cetak->excel($result, "Price List_".$distributor->nama."_Tanggal_".date("d M Y").".xls");
+	}
 }
 
 /* End of file Item.php */

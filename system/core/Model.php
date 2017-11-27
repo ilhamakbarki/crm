@@ -93,7 +93,7 @@ class CI_Model {
 	}
 
 	private function check_affected_row(){
-		return ($this->db->affected_rows() != 1) ? false : true;
+		return ($this->db->affected_rows()!=1) ? false : true;
 	}
 
 	private function get_error_db(){

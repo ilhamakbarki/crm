@@ -1,0 +1,68 @@
+#########################################
+#				User					#
+#		CRUD User API v1				#
+#		URL API = /api/v1/usergroup		#
+#		method = application/json		#
+#########################################
+
+1. Add new user
+	- Request (e.g)
+		{
+			"m":"add",
+			"platfrom":"web",
+			"nama":"tes"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+2. Get User By ID
+	- Request (e.g)
+		{
+			"m":"getUsergroup",
+			"platfrom":"web",
+			"uid":"1"
+		}
+
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": {
+				"uid": "2",
+				"nama": "distributor"
+			}
+		}
+
+3. Delete User
+	- Request (e.g)
+		{
+			"m":"del",
+			"platfrom":"web",
+			"uid":"1"
+		}
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}
+
+4. Update User
+	- Request (e.g)
+		{
+			"m":"edit",
+			"platfrom":"web",
+			"uid":"1",
+			"nama":"distributor"
+		}
+	- Response
+		{
+			"code": 200,
+			"message": "OK",
+			"data": null
+		}

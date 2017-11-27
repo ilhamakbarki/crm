@@ -7,33 +7,22 @@
     <a href="<?=base_url('admin/distributor/add')?>" type="button" class="btn btn-primary">Tambah</a>
     <br><br>
     <div class="table-responsive">  
-      <table class="data-table table table-bordered table-striped table-hover">
+      <table class="data-table table table-bordered table-striped table-hover datatable">
         <thead>
           <tr>
             <th>No</th>
             <th>Nama</th>
             <th>Nama PT</th>
+            <th>Alamat</th>
             <th>Email</th>
-            <th>No. Telp</th>
+            <th>Telp</th>
+            <th>Username</th>
             <th>Level</th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <?php $level=array("Silver","Premium","Gold","Platinum"); for ($i=1; $i <=20 ; $i++) {?>
-          <tr>
-            <td><?=$i?></td>
-            <td>Distributor <?=rand(100,999)?></td>
-            <td>PT <?=$i?></td>
-            <td>distributor<?=$i?>@domain.com</td>
-            <td>087<?=rand(100000000,999999999)?></td>
-            <td><?=$level[rand(0,3)]?></td>
-            <td>
-              <a href="<?=base_url('admin/distributor/edit/')."D".$i?>" class="btn btn-default">Edit</a>
-              <a href="<?=base_url('admin/distributor/delete/')."D".$i?>" class="btn btn-danger">Delete</a>
-            </td>
-          </tr>
-          <?php } ?>
+
         </tbody>
       </table>
     </div>
@@ -42,4 +31,65 @@
 <!-- DataTables -->
 <script src="<?=base_url()?>assets/lte/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="<?=base_url()?>assets/lte/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<script type="text/javascript" src="<?=base_url('assets/js/admin/distributor/distributor-list.js')?>"></script>
+<script type="text/javascript" src="<?=base_url('assets/js/global.js')?>"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $.fn.dataTableExt.oApi.fnPagingInfo = function(oSettings)
+    {
+      return {
+        "iStart": oSettings._iDisplayStart,
+        "iEnd": oSettings.fnDisplayEnd(),
+        "iLength": oSettings._iDisplayLength,
+        "iTotal": oSettings.fnRecordsTotal(),
+        "iFilteredTotal": oSettings.fnRecordsDisplay(),
+        "iPage": Math.ceil(oSettings._iDisplayStart / oSettings._iDisplayLength),
+        "iTotalPages": Math.ceil(oSettings.fnRecordsDisplay() / oSettings._iDisplayLength)
+      };
+    };
+
+    var t = $(".datatable").dataTable({
+      initComplete: function() {
+        var api = this.api();
+        $('.dataTable input')
+        .off('.DT')
+        .on('keyup.DT', function(e) {
+          if (e.keyCode == 13) {
+            api.search(this.value).draw();
+          }
+        });
+      },
+      oLanguage: {
+        sProcessing: "Loading..."
+      },
+      processing: true,
+      serverSide: true,
+      ajax: {"url": base_url()+"/api/v1/distributor/datatable", "type": "POST"},
+      columns: [
+      {
+        "data": "uid",
+        "orderable": false
+      },
+      {"data": "nama"},
+      {"data": "pt"},
+      {"data": "alamat"},
+      {"data": "email"},
+      {"data": "telp"},
+      {"data": "user"},
+      {"data": "grup"},
+      {
+        "data": "action",
+        "orderable":false
+      }
+      ],
+      order: [[1, 'asc']],
+      rowCallback: function(row, data, iDisplayIndex) {
+        var info = this.fnPagingInfo();
+        var page = info.iPage;
+        var length = info.iLength;
+        var index = page * length + (iDisplayIndex + 1);
+        $('td:eq(0)', row).html(index);
+      }
+    });
+
+  });
+</script>

@@ -19,38 +19,22 @@ class Distributor extends CI_Controller {
 
 	public function index()
 	{
-		$crud = new grocery_CRUD();
-		$crud->set_theme('datatables');
-		$crud->set_table('distributor');
-		$crud->set_relation('grup','distributor_grup','nama');
-		$crud->set_relation('id_u','user','user','level=2');
-		$crud->display_as('pt','PT');
-		$crud->display_as('id_u','Username');
-		$crud->display_as('grup','Level Perusahaan');
-		$output = $crud->render();
-		$atr = (array)$output;
 		$atr["judul_menu"] ="Distributor";
-		$atr["desk_menu"] ="Semua data distributor disini";
-		$atr["content"] ="admin/distributor/distributor-list-coba";
-		$this->load->view('admin/template', $atr);
-		/*$atr = array(
-			"judul_menu"=>"Distributor",
-			"desk_menu"=>"Semua data distributor disini"
-			);
+		$atr["desk_menu"] ="Semua data distributor disini";	
 		$atr['content']="admin/distributor/list-distributor";
-		$this->load->view('admin/template', $atr);*/
+		$this->load->view('admin/template', $atr);
 	}
 
-	/*public function edit($id=null)
+	public function edit($id=null)
 	{
-		if($id!=null){
-			$atr["distributor"]=$id;			
-		}
 		$atr = array(
 			"judul_menu"=>"Edit Distributor ",
 			"desk_menu"=>"Untuk merubah data distributor",
 			"content"=>"admin/distributor/distributor-edit"
-			);
+		);
+		$atr["distributor"]=$id;
+		$this->load->model('Table','table');
+		$atr['level']=$this->table->getAll("distributor_grup")->result();
 		$this->load->view('admin/template', $atr);
 		
 	}
@@ -64,7 +48,7 @@ class Distributor extends CI_Controller {
 		$atr = array(
 			"judul_menu"=>"Hapus Distributor ".$id,
 			"desk_menu"=>"Untuk menghapus distributor dari sistem"
-			);
+		);
 		$atr['content']="admin/distributor/distributor-del";
 		$atr['distributor']=$id;
 		$this->load->view('admin/template', $atr);
@@ -72,14 +56,38 @@ class Distributor extends CI_Controller {
 
 	public function add()
 	{
+		$this->load->model('Table','table');
 		$atr = array(
 			"judul_menu"=>"Tambah Distributor",
 			"desk_menu"=>"Untuk menambahkan distributor baru kedalam sistem"
-			);
+		);
+		$atr['level']=$this->table->getAll("distributor_grup")->result();
 		$atr['content']="admin/distributor/distributor-add";
 		$this->load->view('admin/template', $atr);
 	}
-*/
+
+	public function list_selectize(){
+		$this->load->model('Selectize','selectize');
+		$result = $this->selectize->getUserDistributor(array("level"=>$this->input->post('key', TRUE)))->result();
+		if($result){
+			foreach ($result as $i) {
+				$data[] = array("value"=>$i->uid,"text"=>$i->user);
+			}
+			echo json_encode($data);
+		}
+	}
+
+	public function list_selectize_distributor($value='')
+	{
+		$this->load->model('Selectize','selectize');
+		$result = $this->selectize->getSelectize(array("uid"=>$this->input->post('key', TRUE)), "distributor")->result();
+		if($result){
+			foreach ($result as $i) {
+				$data[] = array("value"=>$i->uid,"text"=>$i->nama);
+			}
+			echo json_encode($data);
+		}
+	}
 }
 
 /* End of file Distributor.php */
